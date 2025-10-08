@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:18
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: symfony_app
+      POSTGRES_USER: symfony_app_user
+      POSTGRES_PASSWORD: symfony_app_pass
+    ports:
+      - "5439:5432"
+    networks:
+      - symfony-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - symfony-network
+
+networks:
+  symfony-network:
+    driver: bridge
